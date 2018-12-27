@@ -26,11 +26,12 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		log.info("Something else is wrong here");
+		
+		log.info("--- application start ---");
 		
 		
 		Date newDate = new Date();		
-		log.info(newDate.toString());
+		log.info("normal java date format: " + newDate.toString());
 		
 		EncapClass a = new EncapClass();
 		
@@ -43,18 +44,31 @@ public class DemoApplication implements CommandLineRunner {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.writeValue(new File("target/car.json"), a);
 		
-		log.info("value a..........................");
-		log.info(a.toString());
-		log.info(objectMapper.writeValueAsString(a));
+		log.info("--- value a... from Java Object Instance...");
+		log.info("In object format: " + a.toString());
 		
+		// In JSON format: {"currentDate":"2018-12-27T02:04:32.962+0000","id":"10","message":"hello"}		
+		log.info("In JSON format: " + objectMapper.writeValueAsString(a));
+
 		
 		BufferedReader br = new BufferedReader(new FileReader("target/car.json"));
 		
-		log.info("value b..........................");
+		log.info("--- value b... object load from JSON file...");
 		EncapClass b = objectMapper.readValue(br, EncapClass.class);
-		log.info(b.toString());
-		log.info(objectMapper.writeValueAsString(b));
+		log.info("In object format: " + b.toString());
 		
+		//In JSON format: {"currentDate":"2018-12-27T02:05:17.844+0000","id":"10","message":"hello"}
+		log.info("In JSON format: " + objectMapper.writeValueAsString(b));
+		
+		
+		log.info("Object A is equal to Object B: " + a.equals(b));
+						
+//		{
+//			  "policyNumber": "1234567890",
+//			  "uploadId": "T000000003",
+//			  "uploadStatusTime": "2018-12-12T03:54:40.924+0000",
+//			  "uploadTime": "2018-12-12T03:54:40.924+0000"
+//		}
 		
 	}
 	
