@@ -3,7 +3,9 @@ package com.example.demo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -47,7 +49,13 @@ public class DemoApplication implements CommandLineRunner {
 		log.info("--- value a... from Java Object Instance...");
 		log.info("In object format: " + a.toString());
 		
-		// In JSON format: {"currentDate":"2018-12-27T02:04:32.962+0000","id":"10","message":"hello"}		
+		// In JSON format: {"currentDate":"2018-12-27T02:04:32.962+0000","id":"10","message":"hello"}
+		SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		isoFormat.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+		Date date = isoFormat.parse("2019-01-11T14:30:00");
+		
+		a.setCurrentDate(date);
+		
 		log.info("In JSON format: " + objectMapper.writeValueAsString(a));
 
 		
