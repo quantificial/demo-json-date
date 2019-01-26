@@ -1,4 +1,4 @@
-# java-json-date project
+# demo-json-date project
 
 ### 1. show how to convert Java object to JSON format and then save to disk
 
